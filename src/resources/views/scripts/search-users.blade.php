@@ -96,7 +96,7 @@
                 resultsContainer.html('');
                 usersTable.show();
                 cardTitle.html("{!! trans('laravelusers::laravelusers.showing-all-users') !!}");
-                usersCount.html("{!! trans_choice('laravelusers::laravelusers.users-table.caption', 1, ['userscount' => $users->count()]) !!}");
+                usersCount.html("{!! trans_choice('laravelusers::laravelusers.users-table.caption', $users->count()) !!}");
             };
         });
         clearSearchTrigger.click(function(e) {
@@ -106,7 +106,7 @@
             resultsContainer.html('');
             searchformInput.val('');
             cardTitle.html("{!! trans('laravelusers::laravelusers.showing-all-users') !!}");
-            usersCount.html("{!! trans_choice('laravelusers::laravelusers.users-table.caption', 1, ['userscount' => $users->count()]) !!}");
+            usersCount.html("{!! trans_choice('laravelusers::laravelusers.users-table.caption', $users->count()) !!}");
         });
     });
 </script>

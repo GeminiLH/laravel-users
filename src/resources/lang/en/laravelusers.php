@@ -17,7 +17,7 @@ return [
     'showing-user-title'    => ':name\'s Information',
 
     'users-table' => [
-        'caption'   => '{1} :userscount user total|[2,*] :userscount total users',
+        'caption'   => '{1} :count user total|[2,*] :count total users',
         'id'        => 'ID',
         'name'      => 'Name',
         'email'     => 'Email',

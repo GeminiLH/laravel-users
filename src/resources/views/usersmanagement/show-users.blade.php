@@ -80,7 +80,7 @@
                         <div class="table-responsive users-table">
                             <table class="table table-striped table-sm data-table">
                                 <caption id="user_count">
-                                    {!! trans_choice('laravelusers::laravelusers.users-table.caption', 1, ['userscount' => $users->count()]) !!}
+                                    {!! trans_choice('laravelusers::laravelusers.users-table.caption', $users->count()) !!}
                                 </caption>
                                 <thead class="thead">
                                     <tr>

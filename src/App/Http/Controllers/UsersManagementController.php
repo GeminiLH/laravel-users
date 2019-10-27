@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Validator;
+use Illuminate\Support\Facades\Hash;
 
 class UsersManagementController extends Controller
 {
     private $_authEnabled;
+    private $_authEnabledName;
     private $_rolesEnabled;
     private $_rolesMiddlware;
     private $_rolesMiddleWareEnabled;
@@ -23,12 +25,13 @@ class UsersManagementController extends Controller
     public function __construct()
     {
         $this->_authEnabled = config('laravelusers.authEnabled');
+        $this->_authEnabledName = config('laravelusers.authEnabledName');
         $this->_rolesEnabled = config('laravelusers.rolesEnabled');
         $this->_rolesMiddlware = config('laravelusers.rolesMiddlware');
         $this->_rolesMiddleWareEnabled = config('laravelusers.rolesMiddlwareEnabled');
 
         if ($this->_authEnabled) {
-            $this->middleware('auth');
+            $this->middleware($this->_authEnabledName);
         }
 
         if ($this->_rolesEnabled && $this->_rolesMiddleWareEnabled) {
@@ -120,7 +123,7 @@ class UsersManagementController extends Controller
         $user = config('laravelusers.defaultUserModel')::create([
             'name'             => $request->input('name'),
             'email'            => $request->input('email'),
-            'password'         => bcrypt($request->input('password')),
+            'password'         => Hash::make($request->input('password')),
         ]);
 
         if ($this->_rolesEnabled) {
@@ -223,7 +226,7 @@ class UsersManagementController extends Controller
         }
 
         if ($passwordCheck) {
-            $user->password = bcrypt($request->input('password'));
+            $user->password = Hash::make($request->input('password'));
         }
 
         if ($this->_rolesEnabled) {

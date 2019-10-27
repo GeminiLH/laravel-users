@@ -13,6 +13,9 @@ return [
 
     // Enable `auth` middleware
     'authEnabled'                   => true,
+    
+    // Name of `auth` enabled middleware
+    'authEnabledName'                   => 'auth',
 
     // Enable Optional Roles Middleware on the users assignments
     'rolesEnabled'                  => false,
