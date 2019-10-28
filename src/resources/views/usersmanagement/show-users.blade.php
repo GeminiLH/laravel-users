@@ -128,12 +128,12 @@
                                                 {!! Form::close() !!}
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-success btn-block" href="{{ URL::to('users/' . $user->id) }}" data-toggle="tooltip" title="{!! trans('laravelusers::laravelusers.tooltips.show') !!}">
+                                                <a class="btn btn-sm btn-success btn-block" href="{{ route('users.show', $user) }}" data-toggle="tooltip" title="{!! trans('laravelusers::laravelusers.tooltips.show') !!}">
                                                     {!! trans('laravelusers::laravelusers.buttons.show') !!}
                                                 </a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-sm btn-info btn-block" href="{{ URL::to('users/' . $user->id . '/edit') }}" data-toggle="tooltip" title="{!! trans('laravelusers::laravelusers.tooltips.edit') !!}">
+                                                <a class="btn btn-sm btn-info btn-block" href="{{ route('users.edit', $user) }}" data-toggle="tooltip" title="{!! trans('laravelusers::laravelusers.tooltips.edit') !!}">
                                                     {!! trans('laravelusers::laravelusers.buttons.edit') !!}
                                                 </a>
                                             </td>
