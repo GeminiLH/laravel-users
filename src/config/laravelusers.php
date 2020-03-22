@@ -16,6 +16,11 @@ return [
     
     // Name of `auth` enabled middleware
     'authEnabledName'                   => 'auth',
+    
+    //Custom fields
+    'phoneEnabled'                    => false,
+    'emailTitleEnabled'               => false,
+    'typeEnabled'                     => false,
 
     // Enable Optional Roles Middleware on the users assignments
     'rolesEnabled'                  => false,

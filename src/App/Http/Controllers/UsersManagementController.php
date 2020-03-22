@@ -16,6 +16,9 @@ class UsersManagementController extends Controller
     private $_rolesEnabled;
     private $_rolesMiddlware;
     private $_rolesMiddleWareEnabled;
+    private $_phoneEnabled;
+    private $_emailTitleEnabled;
+    private $_typeEnabled;
 
     /**
      * Create a new controller instance.
@@ -29,6 +32,9 @@ class UsersManagementController extends Controller
         $this->_rolesEnabled = config('laravelusers.rolesEnabled');
         $this->_rolesMiddlware = config('laravelusers.rolesMiddlware');
         $this->_rolesMiddleWareEnabled = config('laravelusers.rolesMiddlwareEnabled');
+        $this->_phoneEnabled = config('laravelusers.phoneEnabled');
+        $this->_emailTitleEnabled = config('laravelusers.emailTitleEnabled');
+        $this->_typeEnabled = config('laravelusers.typeEnabled');
 
         if ($this->_authEnabled) {
             $this->middleware($this->_authEnabledName);
@@ -121,17 +127,27 @@ class UsersManagementController extends Controller
         }
 
         $user = config('laravelusers.defaultUserModel')::create([
-            'name'             => $request->input('name'),
+            'name'             => $validator->name,
             'email'            => $request->input('email'),
             'password'         => Hash::make($request->input('password')),
         ]);
 
+        if ($this->_phoneEnabled) {
+            $user->phone = $request->input('phone');
+        }
+        if ($this->_emailTitleEnabled) {
+            $user->emailTitle = $request->input('emailTitle');
+        }
+        if ($this->_typeEnabled) {
+            $user->type = $request->input('type');
+        }
+        
         if ($this->_rolesEnabled) {
             $user->attachRole($request->input('role'));
             $user->save();
         }
 
-        return redirect('users')->with('success', trans('laravelusers::laravelusers.messages.user-creation-success'));
+        return view ('users.show')->with('success', trans('laravelusers::laravelusers.messages.user-creation-success'));
     }
 
     /**
@@ -233,8 +249,19 @@ class UsersManagementController extends Controller
             $user->detachAllRoles();
             $user->attachRole($request->input('role'));
         }
+        
+        if ($this->_phoneEnabled) {
+            $user->phone = $request->input('phone');
+        }
+        if ($this->_emailTitleEnabled) {
+            $user->emailTitle = $request->input('emailTitle');
+        }
+        if ($this->_typeEnabled) {
+            $user->type = $request->input('type');
+        }
 
         $user->save();
+        
 
         return back()->with('success', trans('laravelusers::laravelusers.messages.update-user-success'));
     }
